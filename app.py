@@ -1,4 +1,3 @@
-```python
 # app.py
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
@@ -8,9 +7,9 @@ app = Flask(__name__)
 
 # --- Configuração do Banco de Dados ---
 # Pega as credenciais das variáveis de ambiente
-DB_USER = os.environ.get(allan_tecnico)
-DB_PASSWORD = os.environ.get(CrcnrzFTSeYiOHgONqPu65Qm3nH6aLCl)
-DB_NAME = os.environ.get(cotacoes_cq3l)
+DB_USER = os.environ.get('POSTGRES_USER')
+DB_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
+DB_NAME = os.environ.get('POSTGRES_DB')
 # Para ambiente local, DB_HOST é 'db'.
 DB_HOST = os.environ.get('DB_HOST', 'db') 
 
@@ -83,4 +82,3 @@ def health_check():
 if __name__ == '__main__':
     # O Flask rodará na porta 8080 dentro do contêiner
     app.run(debug=True, host='0.0.0.0', port=8080)
-```
