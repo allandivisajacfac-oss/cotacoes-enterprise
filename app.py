@@ -9,7 +9,7 @@ app = Flask(__name__)
 # --- Configuração do Banco de Dados ---
 # Pega as credenciais das variáveis de ambiente
 DB_USER = os.environ.get(allan_tecnico)
-DB_PASSWORD = os.environ.get(S@lao5615)
+DB_PASSWORD = os.environ.get(CrcnrzFTSeYiOHgONqPu65Qm3nH6aLCl)
 DB_NAME = os.environ.get(cotacoes_cq3l)
 # Para ambiente local, DB_HOST é 'db'.
 DB_HOST = os.environ.get('DB_HOST', 'db') 
