@@ -1,0 +1,49 @@
+### 4. `docker-compose.yml` (Orquestração Local)
+
+```yaml
+version: '3.8'
+
+services:
+  # Serviço da Aplicação Web (Flask)
+  web:
+    build: .
+    # Mapeia a porta 8080 do contêiner para a porta 5000 da sua máquina local
+    ports:
+      - "5000:8080"
+    restart: always
+    # Monta o volume para hot-reloading (desenvolvimento)
+    volumes:
+      - .:/app
+    environment:
+      FLASK_ENV: development
+      # Variáveis de conexão com o banco de dados (usadas no app.py)
+      POSTGRES_USER: user_docker
+      POSTGRES_PASSWORD: password_docker
+      POSTGRES_DB: myappdb
+      # DB_HOST aponta para o nome do serviço (container) 'db' no Docker Compose
+      DB_HOST: db
+    # Garante que o serviço 'db' seja iniciado antes do 'web'
+    depends_on:
+      - db
+
+  # Serviço do Banco de Dados PostgreSQL
+  db:
+    # Usa a imagem oficial do PostgreSQL (versão estável e leve)
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      # Variáveis de configuração padrão do PostgreSQL. Devem ser as mesmas usadas no serviço 'web'
+      POSTGRES_USER: user_docker
+      POSTGRES_PASSWORD: password_docker
+      POSTGRES_DB: myappdb
+    # Mapeia um volume para persistir os dados do banco no seu Docker Desktop
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    # Opcional: Para acessar o BD diretamente
+    # ports:
+    #   - "5433:5432"
+
+# Definição dos volumes (onde os dados reais serão armazenados no seu Docker Desktop)
+volumes:
+  postgres_data:
+```

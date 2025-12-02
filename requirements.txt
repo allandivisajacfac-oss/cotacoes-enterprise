@@ -1,0 +1,4 @@
+# Versões fixadas para garantir a reprodutibilidade em todos os ambientes
+Flask==3.0.3
+Flask-SQLAlchemy==3.1.1
+psycopg2-binary==2.9.9
