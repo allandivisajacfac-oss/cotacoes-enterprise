@@ -1,6 +1,3 @@
-### 3. `Dockerfile` (Receita da Imagem Docker)
-
-```dockerfile
 # Use uma imagem base oficial do Python
 FROM python:3.9-slim
 
@@ -19,4 +16,3 @@ EXPOSE 8080
 
 # Defina o comando para rodar o aplicativo quando o contêiner for iniciado
 CMD ["python", "app.py"]
-```
