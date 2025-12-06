@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Demonstração de Setup</title>
+    <!-- Carrega o Tailwind CSS para estilização rápida -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Define a fonte Inter como padrão (melhor legibilidade) */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Estilo para centralizar a aplicação na tela */
+        .container-bg {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e5e7eb; /* Fundo cinza claro */
+        }
+    </style>
+</head>
+<body>
+    <div class="container-bg">
+        <!-- Cartão Principal da Aplicação -->
+        <div class="p-8 max-w-lg w-full mx-4 bg-white rounded-xl shadow-2xl space-y-6 transform transition duration-500 hover:shadow-3xl">
+            <header class="text-center">
+                <h1 class="text-3xl font-extrabold text-indigo-700">Sistema de Configuração Rápida</h1>
+                <p class="text-gray-500 mt-1">Clique para executar o processo de inicialização.</p>
+            </header>
+            
+            <!-- Botão de Ação -->
+            <button id="setupButton" onclick="runSetup()" 
+                    class="w-full py-3 px-6 bg-indigo-600 text-white text-lg font-bold rounded-xl shadow-lg 
+                           hover:bg-indigo-700 hover:shadow-xl 
+                           transition duration-300 ease-in-out 
+                           focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:ring-offset-2 
+                           active:scale-95">
+                Executar Configuração (runSetup)
+            </button>
+            
+            <!-- Área de Status/Output -->
+            <div id="output" class="mt-4 p-4 rounded-xl text-center transition-all duration-500 
+                                      bg-gray-100 text-gray-600 font-medium border border-gray-200">
+                Aguardando a execução da configuração.
+            </div>
+
+            <footer class="text-xs text-gray-400 text-center pt-2">
+                Sistema de Demonstração 1.0
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Função principal que executa a lógica de configuração
+        function runSetup() {
+            console.log("Iniciando a função runSetup...");
+            
+            const outputElement = document.getElementById('output');
+            
+            // 1. Estado de Execução (Feedback Visual: Amarelo)
+            outputElement.textContent = "Executando a configuração... Por favor, aguarde.";
+            outputElement.classList.remove('text-green-700', 'bg-green-100', 'text-gray-600', 'bg-gray-100');
+            outputElement.classList.add('text-yellow-800', 'bg-yellow-200', 'shadow-inner');
+            
+            // Desativa o botão para evitar cliques múltiplos
+            document.getElementById('setupButton').disabled = true;
+            document.getElementById('setupButton').classList.add('opacity-50', 'cursor-not-allowed');
+            document.getElementById('setupButton').classList.remove('hover:bg-indigo-700');
+
+            // Simulação de um processo demorado
+            setTimeout(() => {
+                // 2. Estado de Conclusão (Feedback Visual: Verde)
+                outputElement.textContent = "Configuração executada com sucesso! O sistema está pronto.";
+                outputElement.classList.remove('text-yellow-800', 'bg-yellow-200', 'shadow-inner');
+                outputElement.classList.add('text-green-800', 'bg-green-200', 'border-green-400');
+                
+                // Reativa o botão
+                document.getElementById('setupButton').disabled = false;
+                document.getElementById('setupButton').classList.remove('opacity-50', 'cursor-not-allowed');
+                document.getElementById('setupButton').classList.add('hover:bg-indigo-700');
+                
+                console.log("runSetup concluído.");
+            }, 2500); // Processo simulado de 2.5 segundos
+        }
+        
+        // Listener para garantir que a função runSetup esteja disponível após o carregamento
+        document.addEventListener('DOMContentLoaded', () => {
+             console.log("Documento e scripts carregados. O sistema está pronto para interagir.");
+        });
+    </script>
+</body>
+</html>
