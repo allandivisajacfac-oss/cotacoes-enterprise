@@ -14,11 +14,11 @@ services:
     environment:
       FLASK_ENV: development
       # Variáveis de conexão com o banco de dados (usadas no app.py)
-      POSTGRES_USER: dca713a07948ca9960f186919d6d700f
-      POSTGRES_PASSWORD: 7dd23931ba9b2ba58a5988c96fe8c018
-      POSTGRES_DB: 6ba288924eb495dba130fd598d383dcb
+      POSTGRES_USER: user_docker
+      POSTGRES_PASSWORD: password_docker
+      POSTGRES_DB: myappdb
       # DB_HOST aponta para o nome do serviço (container) 'db' no Docker Compose
-      DB_HOST: e03c5b123e9af615c6b7878f2ab4d352
+      DB_HOST: db
     # Garante que o serviço 'db' seja iniciado antes do 'web'
     depends_on:
       - db
@@ -30,9 +30,9 @@ services:
     restart: always
     environment:
       # Variáveis de configuração padrão do PostgreSQL. Devem ser as mesmas usadas no serviço 'web'
-      POSTGRES_USER: 6ba288924eb495dba130fd598d383dcb
-      POSTGRES_PASSWORD: 7dd23931ba9b2ba58a5988c96fe8c018
-      POSTGRES_DB: 6ba288924eb495dba130fd598d383dcb
+      POSTGRES_USER: user_docker
+      POSTGRES_PASSWORD: password_docker
+      POSTGRES_DB: myappdb
     # Mapeia um volume para persistir os dados do banco no seu Docker Desktop
     volumes:
       - postgres_data:/var/lib/postgresql/data/
